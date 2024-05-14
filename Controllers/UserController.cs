@@ -27,13 +27,8 @@ namespace WebAPI_Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateAsync(User? user)
+        public async Task<ActionResult> CreateAsync(User user)
         {
-            if (user == null)
-            {
-                return BadRequest();
-            }
-            
             _userContext.Add(user);
             await _userContext.SaveChangesAsync();
             return Ok(user);
@@ -41,12 +36,8 @@ namespace WebAPI_Server.Controllers
 
 
         [HttpPut]
-        public async Task<ActionResult<User>> EditAsync(User? user)
+        public async Task<ActionResult<User>> EditAsync(User user)
         {
-            if (user == null)
-            {
-                return BadRequest();
-            }
             if (!_userContext.Users.Any(x => x.Id == user.Id))
             {
                 return NotFound();
@@ -63,8 +54,8 @@ namespace WebAPI_Server.Controllers
             var user = _userContext.Users.FirstOrDefault(x => x.Id == id);
 
             if (user == null)
-            { 
-                return BadRequest(); 
+            {
+                return BadRequest();
             }
 
             _userContext.Users.Remove(user);
