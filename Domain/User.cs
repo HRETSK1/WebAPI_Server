@@ -7,7 +7,7 @@ namespace WebAPI_Server.Domain
         public int Id { get; set; }
 
         [Required (ErrorMessage = "Введите имя")]
-        [RegularExpression(@"^[a-z ,.'-]+$", ErrorMessage ="Неверное имя пользователя")]
+        [RegularExpression(@"^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$", ErrorMessage ="Неверное имя пользователя")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Имя должно вмещать от 3 до 50 символов")]
         public string Name { get; set; }
 
